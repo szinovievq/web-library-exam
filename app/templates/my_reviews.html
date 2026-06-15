@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Мои рецензии</h2>
+{% for review in reviews %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ review.book.title }}</h5>
+        <p><strong>Оценка:</strong> {{ review.rating_text }}</p>
+        <p><strong>Статус:</strong> {{ review.status.name }}</p>
+        <div class="review-text">
+            {{ review.text|markdown|safe }}
+        </div>
+        <small class="text-muted">{{ review.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+    </div>
+</div>
+{% else %}
+<p>Вы ещё не оставили ни одной рецензии.</p>
+{% endfor %}
+{% endblock %}

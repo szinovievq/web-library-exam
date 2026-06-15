@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Рассмотрение рецензии</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ review.book.title }}</h5>
+        <p><strong>Пользователь:</strong> {{ review.user.last_name }} {{ review.user.first_name }}</p>
+        <p><strong>Оценка:</strong> {{ review.rating_text }}</p>
+        <div class="review-text">
+            {{ review.text|markdown|safe }}
+        </div>
+        <form method="post">
+            <button type="submit" name="action" value="approve" class="btn btn-success">Одобрить</button>
+            <button type="submit" name="action" value="reject" class="btn btn-danger">Отклонить</button>
+            <a href="{{ url_for('main.moderation_reviews') }}" class="btn btn-secondary">Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

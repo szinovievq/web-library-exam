@@ -1,0 +1,80 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+.container {
+    flex: 1;
+}
+.book-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.book-card .card-img-top {
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    margin: 1rem auto 0.25rem auto;
+    display: block;
+    background-color: #f8f9fa;
+}
+.book-card .card-title {
+    text-align: center;
+    margin-top: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+.book-card .card-body {
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.book-card .btn-group {
+    margin-top: auto;
+    justify-content: center;
+    width: 100%;
+}
+
+.book-details-table {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+.book-details-table td:first-child {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+    white-space: nowrap;
+    width: 1%;
+    vertical-align: top;
+}
+.book-details-table td:last-child {
+    text-align: left;
+    padding-left: 5px;
+}
+
+.book-detail-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+.book-detail-text p,
+.book-detail-text li,
+.book-detail-text div {
+    font-size: 1.05rem;
+}
+.review-text {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+.navbar .btn-outline-light:hover {
+    background-color: #f8f9fa;
+    color: #212529 !important;
+}
+footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    text-align: center;
+    background-color: #f8f9fa;
+}

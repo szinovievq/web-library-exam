@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4 text-center">
+        {% if book.cover %}
+        <img src="{{ url_for('static', filename='uploads/' + book.cover.filename) }}" class="img-fluid" alt="Обложка" style="max-width: 100%;">
+        {% endif %}
+    </div>
+    <div class="col-md-8 book-detail-text">
+        <h1>{{ book.title }}</h1>
+        <p><strong>Автор:</strong> {{ book.author }}</p>
+        <p><strong>Год:</strong> {{ book.year }}</p>
+        <p><strong>Издательство:</strong> {{ book.publisher }}</p>
+        <p><strong>Страниц:</strong> {{ book.pages }}</p>
+        <p><strong>Жанры:</strong> {{ book.genres|map(attribute='name')|join(', ') }}</p>
+        <div class="description">
+            {{ book.description|markdown|safe }}
+        </div>
+    </div>
+</div>
+<h3 class="mt-4">Рецензии</h3>
+{% for review in reviews %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ review.user.last_name }} {{ review.user.first_name }} - Оценка: {{ review.rating }}</h5>
+        <div class="review-text">
+            {{ review.text|markdown|safe }}
+        </div>
+        <small class="text-muted">{{ review.created_at.strftime('%d.%m.%Y %H:%M') }}</small>
+    </div>
+</div>
+{% else %}
+<p>Пока нет одобренных рецензий.</p>
+{% endfor %}
+{% if current_user.is_authenticated and not user_review and current_user.role.name in ('пользователь', 'модератор', 'администратор') %}
+<a href="{{ url_for('main.add_review', id=book.id) }}" class="btn btn-primary">Написать рецензию</a>
+{% elif user_review %}
+<p>Вы уже оставили рецензию: {{ user_review.text|markdown|safe }}</p>
+{% endif %}
+{% endblock %}

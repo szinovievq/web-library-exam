@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ title }}</h2>
+<form method="post" enctype="multipart/form-data" novalidate>
+    {{ form.hidden_tag() }}
+
+    {% if form.csrf_token.errors %}
+        <div class="alert alert-danger">Ошибка CSRF-токена. Обновите страницу и попробуйте снова.</div>
+    {% endif %}
+
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control") }}
+        {% for error in form.title.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control markdown-editor", rows=10) }}
+        {% for error in form.description.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.year.label(class="form-label") }}
+        {{ form.year(class="form-control") }}
+        {% for error in form.year.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.publisher.label(class="form-label") }}
+        {{ form.publisher(class="form-control") }}
+        {% for error in form.publisher.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.author.label(class="form-label") }}
+        {{ form.author(class="form-control") }}
+        {% for error in form.author.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.pages.label(class="form-label") }}
+        {{ form.pages(class="form-control") }}
+        {% for error in form.pages.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.genres.label(class="form-label") }}
+        {{ form.genres(class="form-select", multiple=true, size=8) }}
+        <small class="form-text text-muted">Удерживайте Ctrl (или Cmd на Mac) для выбора нескольких жанров.</small>
+        {% for error in form.genres.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    {% if request.endpoint == 'main.add_book' %}
+    <div class="mb-3">
+        {{ form.cover.label(class="form-label") }}
+        {{ form.cover(class="form-control") }}
+        {% for error in form.cover.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{{ url_for('main.index') }}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
