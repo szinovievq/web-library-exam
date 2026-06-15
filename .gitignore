@@ -22,9 +22,6 @@ build/
 *.secret
 *.key
 
-app/static/uploads/*
-!app/static/uploads/.gitkeep
-
 .env
 .flaskenv
 
